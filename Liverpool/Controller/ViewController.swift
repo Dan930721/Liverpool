@@ -16,6 +16,10 @@ class ViewController: UIViewController {
     private var productList: [Producto] = []
     private var searchController : UISearchController!
     
+    private var page: Int = 2
+    private var criterio: String = ""
+    private var append: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,12 +28,11 @@ class ViewController: UIViewController {
         productsTableView.register(UINib(nibName: "ProductoCellTableViewCell", bundle: nil), forCellReuseIdentifier: "ProductoCellTableViewCell")
         
         setSearchBar()
-        getProducts()
     }
     
     private func setSearchBar() {
         searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Buscar en liverpool"
         navigationItem.searchController = searchController
@@ -37,8 +40,14 @@ class ViewController: UIViewController {
     }
     
     private func getProducts() {
-        LiverpoolGetProducts().getProducts(criterio: "Comnputadora") { (res) in
-            self.productList = res
+        LiverpoolGetProducts().getProducts(criterio: criterio, x: page) { (res) in
+            if (self.append) {
+                self.append = false
+                self.productList.append(contentsOf: res)
+            }
+            else {
+                self.productList = res
+            }
             
             DispatchQueue.main.async {
                 self.productsTableView.reloadData()
@@ -47,10 +56,23 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        
+extension ViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        criterio = searchBar.text ?? ""
+        getProducts()
     }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        productList = []
+        criterio =  ""
+        page = 1
+        productsTableView.reloadData()
+    }
+    
+    /*func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        getProducts(criterio: searchBar.text ?? "")
+    }*/
 }
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
@@ -73,6 +95,15 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120.0
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastElement = productList.count - 1
+        if indexPath.row == lastElement {
+            page += 1
+            getProducts()
+            append = true
+        }
     }
     
     

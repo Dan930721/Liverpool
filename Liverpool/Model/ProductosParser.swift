@@ -21,9 +21,16 @@ class ProductosParser: NSObject {
         if (json["status"]["statusCode"] == 0) {
             if let array = json["plpResults"]["records"].array {
                 for value in array {
+                   
+                    let currencyFormatter = NumberFormatter()
+                    currencyFormatter.usesGroupingSeparator = true
+                    currencyFormatter.numberStyle = .currency
+                    currencyFormatter.locale = Locale.init(identifier: "es_MX")
+                    let priceString = currencyFormatter.string(from: NSNumber(value: value["maximumListPrice"].int ?? 0))!
+                    
                     productosRes.append(Producto(
                         titulo: value["productDisplayName"].string ?? "",
-                        precio: value["maximumListPrice"].string ?? "$0",
+                        precio: priceString,
                         categoria: value["category"].string ?? "",
                         thumbnail: value["smImage"].string ?? ""
                     ))

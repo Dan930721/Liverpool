@@ -73,6 +73,8 @@ class ViewController: UIViewController {
     
 }
 
+// MARK: DELEGATE UISEARCH BAR
+
 extension ViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -108,6 +110,8 @@ extension ViewController: UISearchBarDelegate {
         productsTableView.reloadData()
     }
 }
+
+// MARK: TABLEEVIEW  DELEGATE & DATASOURCEE
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     

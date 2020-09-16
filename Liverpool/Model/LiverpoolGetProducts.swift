@@ -19,9 +19,11 @@ class LiverpoolGetProducts: NSObject {
 
     func getProducts(criterio: String, x: Int = 1, y: Int = 30, callback: @escaping ([Producto]) -> Void) -> Void {
         
-        let url = "\(BASE_URL)?force-plp=true&search-string=\(criterio)&page-number=\(x)&number-of-items-per-page=\(y)"
+        let criterioEncoded = criterio.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        let url = "\(BASE_URL)?force-plp=true&search-string=\(criterioEncoded!)&page-number=\(x)&number-of-items-per-page=\(y)"
         let headers = ["Content-Type" : "application/json","Accept" : "application/json"]
         
+        print(url)
         Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { res in
             
             if (res.response?.statusCode == 200) {

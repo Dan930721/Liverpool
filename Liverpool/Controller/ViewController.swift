@@ -76,13 +76,18 @@ class ViewController: UIViewController {
 extension ViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searching = false
+        productList = []
+        productsTableView.reloadData()
         criterio = searchBar.text ?? ""
         getProducts()
+        searchController.endEditing(true)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searching = false
         productsTableView.reloadData()
+        searchController.endEditing(true)
     }
     
     
@@ -97,7 +102,7 @@ extension ViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        searching = true
         let predicate = NSPredicate(format: "(criterio CONTAINS[cd] %@)", searchText)
         busquedas = coreDataManager.get(entity: "Busquedas", predicate: searchText.isEmpty ? nil : predicate).reversed()
         productsTableView.reloadData()

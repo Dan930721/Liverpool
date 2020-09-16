@@ -23,6 +23,7 @@
 		66899F6F25117F57001546B0 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 66899F6E25117F57001546B0 /* Podfile */; };
 		66899F7225118058001546B0 /* LiverpoolGetProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66899F7125118058001546B0 /* LiverpoolGetProducts.swift */; };
 		66899F74251188BE001546B0 /* ProductosParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66899F73251188BE001546B0 /* ProductosParser.swift */; };
+		66899F7825119E84001546B0 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66899F7725119E84001546B0 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		66899F6E25117F57001546B0 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		66899F7125118058001546B0 /* LiverpoolGetProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiverpoolGetProducts.swift; sourceTree = "<group>"; };
 		66899F73251188BE001546B0 /* ProductosParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductosParser.swift; sourceTree = "<group>"; };
+		66899F7725119E84001546B0 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 				66135FC125117847003CEF83 /* Producto.swift */,
 				66899F7125118058001546B0 /* LiverpoolGetProducts.swift */,
 				66899F73251188BE001546B0 /* ProductosParser.swift */,
+				66899F7725119E84001546B0 /* CoreDataManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				66135F8B25117218003CEF83 /* AppDelegate.swift in Sources */,
 				66135FC225117847003CEF83 /* Producto.swift in Sources */,
 				66135F9525117218003CEF83 /* Liverpool.xcdatamodeld in Sources */,
+				66899F7825119E84001546B0 /* CoreDataManager.swift in Sources */,
 				66135F8D25117218003CEF83 /* SceneDelegate.swift in Sources */,
 				66899F7225118058001546B0 /* LiverpoolGetProducts.swift in Sources */,
 			);

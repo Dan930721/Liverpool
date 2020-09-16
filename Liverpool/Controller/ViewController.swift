@@ -15,8 +15,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var productsTableView: UITableView!
     
     private var productList: [Producto] = []
-    private var searchController : UISearchController!
-    
+    private var searchController : UISearchBar!
+   
     private var page: Int = 2
     private var criterio: String = ""
     private var append: Bool = false
@@ -31,8 +31,6 @@ class ViewController: UIViewController {
         productsTableView.delegate = self
         productsTableView.dataSource = self
         productsTableView.register(UINib(nibName: "ProductoCellTableViewCell", bundle: nil), forCellReuseIdentifier: "ProductoCellTableViewCell")
-        
-        navigationController?.navigationBar.barTintColor = UIColor.init(red: 206/255, green: 48/255, blue: 149/245, alpha: 1.0)
          
         setSearchBar()
         
@@ -41,12 +39,12 @@ class ViewController: UIViewController {
     }
     
     private func setSearchBar() {
-        searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.delegate = self
-        searchController.searchBar.barTintColor = UIColor.init(red: 206/255, green: 48/255, blue: 149/245, alpha: 1.0)
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Buscar en liverpool"
-        navigationItem.searchController = searchController
+        searchController = UISearchBar()
+        searchController.delegate = self
+        searchController.barTintColor = .white
+        searchController.searchBarStyle = .minimal
+        searchController.placeholder = "Buscar en liverpool"
+        navigationItem.titleView = searchController
         definesPresentationContext = true
     }
     
@@ -145,7 +143,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             if let crit = busquedas[indexPath.row].value(forKey: "criterio") as? String {
                 criterio = crit
                 searching = false
-                searchController.searchBar.endEditing(true)
+                searchController.endEditing(true)
                 getProducts()
             }
         }
